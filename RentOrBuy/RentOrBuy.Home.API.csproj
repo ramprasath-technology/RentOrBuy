@@ -17,8 +17,4 @@
     <ProjectReference Include="..\RentOrBuy.Home.Business\RentOrBuy.Home.Business.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
