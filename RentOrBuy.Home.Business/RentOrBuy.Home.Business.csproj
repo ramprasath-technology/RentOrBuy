@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CommonExtensions\CommonExtensions.csproj" />
+    <ProjectReference Include="..\RentOrBuy.Home.DataModel\RentOrBuy.Home.DataModel.csproj" />
+  </ItemGroup>
+
 </Project>
