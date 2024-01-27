@@ -21,7 +21,7 @@ namespace RentOrBuy.Home.Business.RentOrBuyComputations
         {
             var ownershipCostsTask = Task.Run(() =>
             {
-                return _homeOwnershipCalculator.CalculateHomeOwnershipCost(input.OwnershipCosts);
+                return _homeOwnershipCalculator.CalculateHomeOwnershipCost(input.OwnershipCosts, input.EconomicCosts);
             });
             
             //TODO: Rental costs task

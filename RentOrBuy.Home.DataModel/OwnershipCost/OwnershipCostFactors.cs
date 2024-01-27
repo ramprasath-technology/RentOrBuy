@@ -29,12 +29,13 @@ namespace RentOrBuy.Home.DataModel.OwnershipCost
         #endregion
 
         #region Ongoing costs
-        public decimal Maintenance { get; set; }
+        public decimal MaintenancePercentage { get; set; }
         [Description("Annual home owner insurance as percentage of home value")]
-        public decimal HomeownerInsurance { get; set; }
+        public decimal HomeownerInsurancePercentage { get; set; }
         [Description("Monthly utility costs more than what you pay when you rent")]
         public uint MonthlyUtilities { get; set; }
         public uint MonthlyCommonFees { get; set; }
+        public decimal PropertyTaxPercentage { get; set; }
         #endregion
 
     }
