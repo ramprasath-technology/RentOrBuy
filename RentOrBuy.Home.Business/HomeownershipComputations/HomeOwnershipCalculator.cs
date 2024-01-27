@@ -1,9 +1,4 @@
 ﻿using RentOrBuy.Home.DataModel.OwnershipCost;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommonExtensions.MathExtensions;
 using RentOrBuy.Home.DataModel.EconomicCost;
 
@@ -20,6 +15,15 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
             return costTracker;
         }
 
+        private void InitializeOwnershipCostTracker(Dictionary<ushort, OwnershipCostEachYear> tracker, 
+            ushort lengthOfStay)
+        {
+            for (ushort i = 0; i < lengthOfStay; i++)
+            {
+                tracker[i] = new OwnershipCostEachYear();
+            }
+        }
+
         private void CalculateOwnershipCostForEachYear(OwnershipCostFactors ownershipCosts,
             EconomicCostFactors economicFactors,
             Dictionary<ushort, OwnershipCostEachYear> ownershipCostsPerYear)
@@ -32,15 +36,6 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
                 CalculateMaintenanceEachYear(ownershipCostsPerYear, ownershipCosts, i);
                 CalculateCommonFeeEachYear(ownershipCostsPerYear, i, economicFactors.Inflation);
                 CalculateExcessUtilitiesEachYear(ownershipCostsPerYear, i, economicFactors.Inflation);
-            }
-        }
-
-        private void InitializeOwnershipCostTracker(Dictionary<ushort, OwnershipCostEachYear> tracker,
-            ushort lengthOfStay)
-        {
-            for (ushort i = 0; i < lengthOfStay; i++)
-            {
-                tracker[i] = new OwnershipCostEachYear();
             }
         }
 
