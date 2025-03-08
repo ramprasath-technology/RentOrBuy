@@ -56,7 +56,7 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
         {
             var value = ownershipCostPerYear[year];
             var homeValuePreviousYear = ownershipCostPerYear[(ushort)(year - 1)].HomeValue;
-            var increaseThisYear = homeValuePreviousYear * ownershipCosts.AnnualPriceGrowthRate;
+            var increaseThisYear = (homeValuePreviousYear * ownershipCosts.AnnualPriceGrowthRate) / 100;
             var homeValueThisYear = (homeValuePreviousYear + increaseThisYear).RoundToTwoDecimalPlaces();   
             value.HomeValue = homeValueThisYear;
         }
@@ -68,7 +68,17 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
         {
             var currentYear = ownershipCostPerYear[year];
             var currentHomeValue = currentYear.HomeValue;
-            currentYear.PropertyTax = (currentHomeValue * ownershipCosts.PropertyTaxPercentage).RoundToTwoDecimalPlaces();
+            currentYear.PropertyTax = (currentHomeValue * ownershipCosts.PropertyTaxPercentage / 100).RoundToTwoDecimalPlaces();
+        }
+
+        private void CalculateHomeInsuranceEachYear(Dictionary<ushort, OwnershipCostEachYear>
+            ownershipCostPerYear,
+            OwnershipCostFactors ownershipCosts,
+            ushort year)
+        {
+            var currentYear = ownershipCostPerYear[year];
+            var currentHomeValue = currentYear.HomeValue;
+            currentYear.HomeInsurance = (currentHomeValue * ownershipCosts.HomeownerInsurancePercentage / 100).RoundToTwoDecimalPlaces();
         }
 
         private void CalculateMaintenanceEachYear(Dictionary<ushort, OwnershipCostEachYear>
@@ -78,7 +88,7 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
         {
             var currentYear = ownershipCostPerYear[year];
             var currentHomeValue = currentYear.HomeValue;
-            currentYear.MaintenanceCost = (currentHomeValue * ownershipCosts.MaintenancePercentage).RoundToTwoDecimalPlaces();
+            currentYear.MaintenanceCost = (currentHomeValue * ownershipCosts.MaintenancePercentage / 100).RoundToTwoDecimalPlaces();
         }
 
         private void CalculateCommonFeeEachYear(Dictionary<ushort, OwnershipCostEachYear>
@@ -88,7 +98,7 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
         {
             var currentYear = ownershipCostPerYear[year];
             var commonFeePreviousYear = ownershipCostPerYear[--year].CommonFee;
-            var feeIncrease = commonFeePreviousYear * inflation;
+            var feeIncrease = commonFeePreviousYear * (inflation / 100);
             currentYear.CommonFee = (feeIncrease + commonFeePreviousYear).RoundToTwoDecimalPlaces();
         }
 
@@ -99,7 +109,7 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
         {
             var currentYear = ownershipCostPerYear[year];
             var excessUtilities = ownershipCostPerYear[--year].ExcessUtilities;
-            var utilityIncrease = excessUtilities * inflation;
+            var utilityIncrease = excessUtilities * (inflation / 100);
             currentYear.ExcessUtilities = (utilityIncrease + excessUtilities).RoundToTwoDecimalPlaces();
         }
     }

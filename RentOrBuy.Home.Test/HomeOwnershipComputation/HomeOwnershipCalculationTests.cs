@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace RentOrBuy.Home.Test.HomeOwnershipComputation
 {
-    public class HomeOwnershipComputationTests
+    public class HomeOwnershipCalculationTests
     {
         private HomeOwnershipCalculator _owneshipCalculator;
-        public HomeOwnershipComputationTests() 
+        public HomeOwnershipCalculationTests() 
         {
             _owneshipCalculator = new HomeOwnershipCalculator();
         }
