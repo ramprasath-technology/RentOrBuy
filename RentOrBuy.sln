@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentOrBuy.Home.DataAccess",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentOrBuy.Home.DataModel", "RentOrBuy.Home.DataModel\RentOrBuy.Home.DataModel.csproj", "{1EC4F4B8-65A3-497B-AB28-D59411B79C0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonExtensions", "CommonExtensions\CommonExtensions.csproj", "{2139CE0A-E190-411C-A813-DE2ED700BE68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonExtensions", "CommonExtensions\CommonExtensions.csproj", "{2139CE0A-E190-411C-A813-DE2ED700BE68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentOrBuy.Home.Test", "RentOrBuy.Home.Test\RentOrBuy.Home.Test.csproj", "{93719633-0B06-4E1A-8394-804C49F79819}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2139CE0A-E190-411C-A813-DE2ED700BE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2139CE0A-E190-411C-A813-DE2ED700BE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2139CE0A-E190-411C-A813-DE2ED700BE68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93719633-0B06-4E1A-8394-804C49F79819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93719633-0B06-4E1A-8394-804C49F79819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93719633-0B06-4E1A-8394-804C49F79819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93719633-0B06-4E1A-8394-804C49F79819}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
