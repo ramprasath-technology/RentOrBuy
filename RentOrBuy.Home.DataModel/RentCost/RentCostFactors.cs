@@ -10,6 +10,6 @@ namespace RentOrBuy.Home.DataModel.RentCost
     {
         public decimal MonthlyRent { get; set; }
         public decimal AnnualRentGrowthRate { get; set; }
-        public decimal RentersInsurance { get; set; }
+        public decimal RentersInsuranceInPercentage { get; set; }
     }
 }

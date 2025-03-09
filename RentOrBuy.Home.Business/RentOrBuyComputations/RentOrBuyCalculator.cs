@@ -14,8 +14,8 @@ namespace RentOrBuy.Home.Business.RentOrBuyComputations
     { 
 
         private readonly IHomeAppreciationCalculator _homeAppreciationCalculator;
-        private readonly IHomeOwnershipCalculator _homeOwnershipCalculator;
-        public RentOrBuyCalculator(IHomeOwnershipCalculator homeOwnershipCalculator,
+        private readonly IHomeOwnershipCostCalculator _homeOwnershipCalculator;
+        public RentOrBuyCalculator(IHomeOwnershipCostCalculator homeOwnershipCalculator,
             IHomeAppreciationCalculator homeAppreciationCalculator)
         {
             _homeAppreciationCalculator = homeAppreciationCalculator;
