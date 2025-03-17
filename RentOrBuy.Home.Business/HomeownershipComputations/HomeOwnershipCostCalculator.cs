@@ -7,18 +7,19 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
     public class HomeOwnershipCostCalculator : IHomeOwnershipCostCalculator
     {
         public Dictionary<ushort, OwnershipCostEachYear> CalculateHomeOwnershipCost(OwnershipCostFactors ownershipCosts,
-            EconomicCostFactors economicFactors)
+            EconomicCostFactors economicFactors,
+            Dictionary<byte, decimal> homeValueEachYear)
         {
             var costTracker = new Dictionary<ushort, OwnershipCostEachYear>();
-            InitializeOwnershipCostTracker(costTracker, ownershipCosts.PlannedLengthOfStay);
-            CalculateOwnershipCostForEachYear(ownershipCosts, economicFactors, costTracker);
+            InitializeOwnershipCostTracker(costTracker, (byte)homeValueEachYear.Count);
+            CalculateOwnershipCostForEachYear(ownershipCosts, economicFactors, costTracker, homeValueEachYear);
             return costTracker;
         }
 
         private void InitializeOwnershipCostTracker(Dictionary<ushort, OwnershipCostEachYear> tracker, 
-            ushort lengthOfStay)
+            byte lengthOfStay)
         {
-            for (ushort i = 0; i < lengthOfStay; i++)
+            for (byte i = 0; i < lengthOfStay; i++)
             {
                 tracker[i] = new OwnershipCostEachYear();
             }
@@ -26,14 +27,15 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
 
         private void CalculateOwnershipCostForEachYear(OwnershipCostFactors ownershipCosts,
             EconomicCostFactors economicFactors,
-            Dictionary<ushort, OwnershipCostEachYear> ownershipCostsPerYear)
+            Dictionary<ushort, OwnershipCostEachYear> ownershipCostsPerYear,
+            Dictionary<byte, decimal> homeValueEachYear)
         {
             CalculateCostsForYearZero(ownershipCosts, ownershipCostsPerYear);
-            for (ushort i = 1; i < ownershipCostsPerYear.Count; i++)
+            for (byte i = 1; i < ownershipCostsPerYear.Count; i++)
             {
-                CalculateHomeValueEachYear(ownershipCostsPerYear, ownershipCosts, i);
-                CalculatePropertyTaxEachYear(ownershipCostsPerYear, ownershipCosts, i);
-                CalculateMaintenanceEachYear(ownershipCostsPerYear, ownershipCosts, i);
+                CalculatePropertyTaxEachYear(ownershipCostsPerYear, ownershipCosts, i, homeValueEachYear[i]);
+                CalculateMaintenanceEachYear(ownershipCostsPerYear, ownershipCosts, i, homeValueEachYear[i]);
+                CalculateHomeInsuranceEachYear(ownershipCostsPerYear, ownershipCosts, i, homeValueEachYear[i]);
                 CalculateCommonFeeEachYear(ownershipCostsPerYear, i, economicFactors.Inflation);
                 CalculateExcessUtilitiesEachYear(ownershipCostsPerYear, i, economicFactors.Inflation);
             }
@@ -49,51 +51,39 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
             ownershipCostPerYear[0].HomeInsurance = (ownershipCosts.Price * ownershipCosts.HomeownerInsurancePercentage).RoundToTwoDecimalPlaces();
         }
 
-        private void CalculateHomeValueEachYear(Dictionary<ushort, OwnershipCostEachYear> 
-            ownershipCostPerYear,
-            OwnershipCostFactors ownershipCosts,
-            ushort year)
-        {
-            var value = ownershipCostPerYear[year];
-            var homeValuePreviousYear = ownershipCostPerYear[(ushort)(year - 1)].HomeValue;
-            var increaseThisYear = (homeValuePreviousYear * ownershipCosts.AnnualPriceGrowthRate) / 100;
-            var homeValueThisYear = (homeValuePreviousYear + increaseThisYear).RoundToTwoDecimalPlaces();   
-            value.HomeValue = homeValueThisYear;
-        }
-
         private void CalculatePropertyTaxEachYear(Dictionary<ushort, OwnershipCostEachYear>
             ownershipCostPerYear,
             OwnershipCostFactors ownershipCosts,
-            ushort year)
+            byte year,
+            decimal currentHomeValue)
         {
             var currentYear = ownershipCostPerYear[year];
-            var currentHomeValue = currentYear.HomeValue;
             currentYear.PropertyTax = (currentHomeValue * ownershipCosts.PropertyTaxPercentage / 100).RoundToTwoDecimalPlaces();
         }
 
         private void CalculateHomeInsuranceEachYear(Dictionary<ushort, OwnershipCostEachYear>
             ownershipCostPerYear,
             OwnershipCostFactors ownershipCosts,
-            ushort year)
+            byte year,
+            decimal currentHomeValue)
         {
             var currentYear = ownershipCostPerYear[year];
-            var currentHomeValue = currentYear.HomeValue;
             currentYear.HomeInsurance = (currentHomeValue * ownershipCosts.HomeownerInsurancePercentage / 100).RoundToTwoDecimalPlaces();
         }
 
         private void CalculateMaintenanceEachYear(Dictionary<ushort, OwnershipCostEachYear>
             ownershipCostPerYear,
             OwnershipCostFactors ownershipCosts,
-            ushort year)
+            byte year,
+            decimal currentHomeValue)
         {
             var currentYear = ownershipCostPerYear[year];
-            var currentHomeValue = currentYear.HomeValue;
             currentYear.MaintenanceCost = (currentHomeValue * ownershipCosts.MaintenancePercentage / 100).RoundToTwoDecimalPlaces();
         }
 
         private void CalculateCommonFeeEachYear(Dictionary<ushort, OwnershipCostEachYear>
             ownershipCostPerYear,
-            ushort year,
+            byte year,
             decimal inflation)
         {
             var currentYear = ownershipCostPerYear[year];
@@ -104,7 +94,7 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
 
         private void CalculateExcessUtilitiesEachYear(Dictionary<ushort, OwnershipCostEachYear>
           ownershipCostPerYear,
-          ushort year,
+          byte year,
           decimal inflation)
         {
             var currentYear = ownershipCostPerYear[year];

@@ -10,7 +10,6 @@ namespace RentOrBuy.Home.DataModel.OwnershipCost
     public record OwnershipCostFactors
     {
         public uint Price { get; init; }
-        public byte PlannedLengthOfStay { get; set; }  
         [Description("Projected annual home price growth as percentage of home value")]
         public decimal AnnualPriceGrowthRate { get; set; }
 

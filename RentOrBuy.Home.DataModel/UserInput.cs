@@ -14,5 +14,6 @@ namespace RentOrBuy.Home.DataModel
         public OwnershipCostFactors OwnershipCosts { get; set; } = new OwnershipCostFactors();
         public RentCostFactors RentCosts { get; set; } = new RentCostFactors();
         public EconomicCostFactors EconomicCosts { get; set; } = new EconomicCostFactors();
+        public byte PlannedLengthOfStay { get; set; }
     }
 }

@@ -32,7 +32,6 @@ namespace RentOrBuy.Home.Test.HomeOwnershipComputation
                 MonthlyCommonFees = 100,
                 MonthlyUtilities = 100,
                 MortgageRate = 5,
-                PlannedLengthOfStay = 10,
                 Price = 500000,
                 PropertyTaxPercentage = 1.5m
             };
@@ -41,8 +40,13 @@ namespace RentOrBuy.Home.Test.HomeOwnershipComputation
                 Inflation = 2,
                 InvestmentReturn = 8
             };
+
+            var homeValueEachYear = new Dictionary<byte, decimal>();
+            homeValueEachYear[0] = 500000;
+            homeValueEachYear[1] = 505000;
             var calulatorObject = _owneshipCalculator.CalculateHomeOwnershipCost(ownershipCosts,
-                economicFactors);
+                economicFactors,
+                homeValueEachYear);
 
             Assert.NotNull(calulatorObject);
         }

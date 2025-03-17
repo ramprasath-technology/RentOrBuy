@@ -1,5 +1,6 @@
 ﻿using RentOrBuy.Home.Business.HomeownershipCompuations;
 using RentOrBuy.Home.Business.HomeownershipComputations;
+using RentOrBuy.Home.Business.RentalComputations;
 using RentOrBuy.Home.DataModel;
 using RentOrBuy.Home.DataModel.CalculationResponse;
 using System;
@@ -15,35 +16,32 @@ namespace RentOrBuy.Home.Business.RentOrBuyComputations
 
         private readonly IHomeAppreciationCalculator _homeAppreciationCalculator;
         private readonly IHomeOwnershipCostCalculator _homeOwnershipCalculator;
+        private readonly IRentalCostCalculator _rentalCostCalculator;
         public RentOrBuyCalculator(IHomeOwnershipCostCalculator homeOwnershipCalculator,
-            IHomeAppreciationCalculator homeAppreciationCalculator)
+            IHomeAppreciationCalculator homeAppreciationCalculator,
+            IRentalCostCalculator rentalCostCalculator)
         {
             _homeAppreciationCalculator = homeAppreciationCalculator;
-            _homeOwnershipCalculator = homeOwnershipCalculator;  
+            _homeOwnershipCalculator = homeOwnershipCalculator;
+            _rentalCostCalculator = rentalCostCalculator;
         }
 
         public async Task<Response> GetRentOrBuyDecision(UserInput input)
         {
             var homeAppreciation = _homeAppreciationCalculator.CalculateHomePriceForEachYear(
                 input.OwnershipCosts.Price, 
-                input.OwnershipCosts.PlannedLengthOfStay,
+                input.PlannedLengthOfStay,
                 input.OwnershipCosts.AnnualPriceGrowthRate);
 
-            
+            var homeOwnershipCost = _homeOwnershipCalculator.CalculateHomeOwnershipCost(
+                input.OwnershipCosts,
+                input.EconomicCosts,
+                homeAppreciation);
 
-
-            var ownershipCostsTask = Task.Run(() =>
-            {
-                return _homeOwnershipCalculator.CalculateHomeOwnershipCost(input.OwnershipCosts, input.EconomicCosts);
-            });
-            
-            //TODO: Rental costs task
-
-            var ownershipCosts = await ownershipCostsTask;
-
-            //TODO: Compare opportunity cost
-
-            //TODO: Construct the response
+            var rentalCost = _rentalCostCalculator.CalculateRentalCost(
+                input.RentCosts,
+                input.PlannedLengthOfStay
+                );
 
             return new Response();
         }
