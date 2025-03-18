@@ -14,6 +14,7 @@ namespace RentOrBuy.Home.API
             services.AddScoped<IHomeOwnershipCostCalculator, HomeOwnershipCostCalculator>();
             services.AddScoped<IHomeAppreciationCalculator, HomeAppreciationCalculator>();
             services.AddScoped<IRentalCostCalculator, RentalCostCalculator>();
+            services.AddScoped<ITotalRentalCostCalculator, TotalRentalCostCalculator>();
             return services;
         }
     }
