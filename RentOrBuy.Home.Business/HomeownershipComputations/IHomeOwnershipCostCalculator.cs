@@ -1,4 +1,4 @@
-﻿using RentOrBuy.Home.DataModel.EconomicCost;
+﻿using RentOrBuy.Home.DataModel.EconomicInputs;
 using RentOrBuy.Home.DataModel.OwnershipCost;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
         /// <param name="ownershipCostFactors"></param>
         /// <returns>Key is year, value is cost. Key ranges from 0 to planned length of stay - 1</returns>
         Dictionary<ushort, OwnershipCostEachYear> CalculateHomeOwnershipCost(OwnershipCostFactors ownershipCosts,
-            EconomicCostFactors economicFactors,
+            EconomicFactors economicFactors,
             Dictionary<byte, decimal> homeValueEachYear);
     }
 }

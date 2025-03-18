@@ -1,13 +1,13 @@
 ﻿using RentOrBuy.Home.DataModel.OwnershipCost;
 using CommonExtensions.MathExtensions;
-using RentOrBuy.Home.DataModel.EconomicCost;
+using RentOrBuy.Home.DataModel.EconomicInputs;
 
 namespace RentOrBuy.Home.Business.HomeownershipCompuations
 {
     public class HomeOwnershipCostCalculator : IHomeOwnershipCostCalculator
     {
         public Dictionary<ushort, OwnershipCostEachYear> CalculateHomeOwnershipCost(OwnershipCostFactors ownershipCosts,
-            EconomicCostFactors economicFactors,
+            EconomicFactors economicFactors,
             Dictionary<byte, decimal> homeValueEachYear)
         {
             var costTracker = new Dictionary<ushort, OwnershipCostEachYear>();
@@ -26,7 +26,7 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
         }
 
         private void CalculateOwnershipCostForEachYear(OwnershipCostFactors ownershipCosts,
-            EconomicCostFactors economicFactors,
+            EconomicFactors economicFactors,
             Dictionary<ushort, OwnershipCostEachYear> ownershipCostsPerYear,
             Dictionary<byte, decimal> homeValueEachYear)
         {
@@ -44,7 +44,6 @@ namespace RentOrBuy.Home.Business.HomeownershipCompuations
         private void CalculateCostsForYearZero(OwnershipCostFactors ownershipCosts,
             Dictionary<ushort, OwnershipCostEachYear> ownershipCostPerYear)
         {
-            ownershipCostPerYear[0].HomeValue = ownershipCosts.Price;
             ownershipCostPerYear[0].CommonFee = ownershipCosts.MonthlyCommonFees * 12;
             ownershipCostPerYear[0].ExcessUtilities = ownershipCosts.MonthlyUtilities * 12;
             ownershipCostPerYear[0].MaintenanceCost = (ownershipCosts.Price * ownershipCosts.MaintenancePercentage).RoundToTwoDecimalPlaces();

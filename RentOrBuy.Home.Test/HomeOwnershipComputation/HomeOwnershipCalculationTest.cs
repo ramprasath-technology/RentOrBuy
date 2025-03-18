@@ -1,5 +1,5 @@
 ﻿using RentOrBuy.Home.Business.HomeownershipCompuations;
-using RentOrBuy.Home.DataModel.EconomicCost;
+using RentOrBuy.Home.DataModel.EconomicInputs;
 using RentOrBuy.Home.DataModel.OwnershipCost;
 using System;
 using System.Collections.Generic;
@@ -35,7 +35,7 @@ namespace RentOrBuy.Home.Test.HomeOwnershipComputation
                 Price = 500000,
                 PropertyTaxPercentage = 1.5m
             };
-            var economicFactors = new EconomicCostFactors()
+            var economicFactors = new EconomicFactors()
             {
                 Inflation = 2,
                 InvestmentReturn = 8

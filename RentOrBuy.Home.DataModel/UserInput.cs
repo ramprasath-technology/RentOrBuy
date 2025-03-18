@@ -1,4 +1,4 @@
-﻿using RentOrBuy.Home.DataModel.EconomicCost;
+﻿using RentOrBuy.Home.DataModel.EconomicInputs;
 using RentOrBuy.Home.DataModel.OwnershipCost;
 using RentOrBuy.Home.DataModel.RentCost;
 using System;
@@ -13,7 +13,7 @@ namespace RentOrBuy.Home.DataModel
     {
         public OwnershipCostFactors OwnershipCosts { get; set; } = new OwnershipCostFactors();
         public RentCostFactors RentCosts { get; set; } = new RentCostFactors();
-        public EconomicCostFactors EconomicCosts { get; set; } = new EconomicCostFactors();
+        public EconomicFactors EconomicCosts { get; set; } = new EconomicFactors();
         public byte PlannedLengthOfStay { get; set; }
     }
 }
