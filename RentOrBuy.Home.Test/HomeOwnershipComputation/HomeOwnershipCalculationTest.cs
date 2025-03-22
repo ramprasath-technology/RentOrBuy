@@ -1,4 +1,4 @@
-﻿using RentOrBuy.Home.Business.HomeownershipCompuations;
+﻿using RentOrBuy.Home.Business.HomeownershipComputations.HomeOwnershipComputation;
 using RentOrBuy.Home.DataModel.EconomicInputs;
 using RentOrBuy.Home.DataModel.OwnershipCost;
 using System;

@@ -1,6 +1,6 @@
 ﻿using CommonExtensions.MathExtensions;
 using Moq;
-using RentOrBuy.Home.Business.RentalComputations;
+using RentOrBuy.Home.Business.RentalComputations.RentalCostComputation;
 using RentOrBuy.Home.DataModel.RentCost;
 using System;
 using System.Collections.Generic;

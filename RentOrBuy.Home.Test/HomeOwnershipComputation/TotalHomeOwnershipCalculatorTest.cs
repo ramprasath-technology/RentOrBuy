@@ -1,4 +1,4 @@
-﻿using RentOrBuy.Home.Business.HomeownershipComputations;
+﻿using RentOrBuy.Home.Business.HomeownershipComputations.TotalHomeOwnershipCostComputation;
 using RentOrBuy.Home.DataModel.OwnershipCost;
 using System;
 using System.Collections.Generic;

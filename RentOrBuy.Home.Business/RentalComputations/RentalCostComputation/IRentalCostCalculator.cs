@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RentOrBuy.Home.Business.RentalComputations
+namespace RentOrBuy.Home.Business.RentalComputations.RentalCostComputation
 {
     public interface IRentalCostCalculator
     {

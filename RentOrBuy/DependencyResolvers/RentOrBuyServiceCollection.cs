@@ -1,6 +1,7 @@
-﻿using RentOrBuy.Home.Business.HomeownershipCompuations;
-using RentOrBuy.Home.Business.HomeownershipComputations;
-using RentOrBuy.Home.Business.RentalComputations;
+﻿using RentOrBuy.Home.Business.HomeownershipComputations.HomeAppreciationComputation;
+using RentOrBuy.Home.Business.HomeownershipComputations.HomeOwnershipComputation;
+using RentOrBuy.Home.Business.RentalComputations.RentalCostComputation;
+using RentOrBuy.Home.Business.RentalComputations.TotalRentalCostComputation;
 using RentOrBuy.Home.Business.RentOrBuyComputations;
 
 namespace RentOrBuy.Home.API

@@ -1,5 +1,5 @@
 ﻿using CommonExtensions.MathExtensions;
-using RentOrBuy.Home.Business.HomeownershipComputations;
+using RentOrBuy.Home.Business.HomeownershipComputations.HomeAppreciationComputation;
 using System;
 using System.Collections.Generic;
 using System.Linq;

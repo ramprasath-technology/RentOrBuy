@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RentOrBuy.Home.Business.RentalComputations
+namespace RentOrBuy.Home.Business.RentalComputations.TotalRentalCostComputation
 {
     public class TotalRentalCostCalculator : ITotalRentalCostCalculator
     {
@@ -15,8 +15,8 @@ namespace RentOrBuy.Home.Business.RentalComputations
             var totalRentalCost = new TotalRentalCost();
             var totalRentalInsurance = 0m;
             var totalRent = 0m;
-            
-            foreach (var rentCostForCurrentYear in  rentCostEachYear)
+
+            foreach (var rentCostForCurrentYear in rentCostEachYear)
             {
                 totalRentalInsurance += rentCostForCurrentYear.RentalInsurance;
                 totalRent += rentCostForCurrentYear.Rent;
