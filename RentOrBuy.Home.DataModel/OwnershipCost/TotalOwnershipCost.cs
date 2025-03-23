@@ -15,6 +15,7 @@ namespace RentOrBuy.Home.DataModel.OwnershipCost
         public decimal TotalPropertyTax { get; set; }
         public decimal TotalExcessUtilitiesCost { get; set; }
         public decimal TotalMaintenanceCost { get; set; }
-        public decimal TotalCost => TotalMortgagePayment + DownPayment + TotalOneTimeCost + TotalInsurancePremiums + TotalPropertyTax + TotalExcessUtilitiesCost + TotalMaintenanceCost;
+        public decimal TotalMortgageInterest { get; set; }
+        public decimal TotalCost => TotalMortgagePayment + DownPayment + TotalOneTimeCost + TotalInsurancePremiums + TotalPropertyTax + TotalExcessUtilitiesCost + TotalMaintenanceCost + TotalMortgageInterest;
     }
 }

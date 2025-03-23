@@ -20,6 +20,7 @@ namespace RentOrBuy.Home.Business.HomeownershipComputations.TotalHomeOwnershipCo
                 totalOwnershipCost.TotalExcessUtilitiesCost += ownershipCostForCurrentYear.ExcessUtilities;
                 totalOwnershipCost.TotalInsurancePremiums += ownershipCostForCurrentYear.HomeInsurance;
                 totalOwnershipCost.TotalPropertyTax += ownershipCostForCurrentYear.PropertyTax;
+                totalOwnershipCost.TotalMortgageInterest += ownershipCostForCurrentYear.MortgageInterestPayment;
             }
             totalOwnershipCost.TotalOneTimeCost = ownershipCostFactors.ClosingCostWhenBuying + ownershipCostFactors.ClosingCostWhenSelling;
 

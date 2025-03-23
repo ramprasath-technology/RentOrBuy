@@ -1,6 +1,8 @@
 ﻿using RentOrBuy.Home.Business.HomeownershipComputations.HomeAppreciationComputation;
 using RentOrBuy.Home.Business.HomeownershipComputations.HomeOwnershipComputation;
+using RentOrBuy.Home.Business.HomeownershipComputations.TotalHomeOwnershipCostComputation;
 using RentOrBuy.Home.Business.RentalComputations.RentalCostComputation;
+using RentOrBuy.Home.Business.RentalComputations.TotalRentalCostComputation;
 using RentOrBuy.Home.DataModel;
 using RentOrBuy.Home.DataModel.CalculationResponse;
 using RentOrBuy.Home.DataModel.OwnershipCost;
@@ -19,13 +21,19 @@ namespace RentOrBuy.Home.Business.RentOrBuyComputations
         private readonly IHomeAppreciationCalculator _homeAppreciationCalculator;
         private readonly IHomeOwnershipCostCalculator _homeOwnershipCalculator;
         private readonly IRentalCostCalculator _rentalCostCalculator;
+        private readonly ITotalHomeOwnershipCostCalculator _totalHomeownershipCostCalculator;
+        private readonly ITotalRentalCostCalculator _totalRentalCostCalculator;
         public RentOrBuyCalculator(IHomeOwnershipCostCalculator homeOwnershipCalculator,
             IHomeAppreciationCalculator homeAppreciationCalculator,
-            IRentalCostCalculator rentalCostCalculator)
+            IRentalCostCalculator rentalCostCalculator,
+            ITotalHomeOwnershipCostCalculator totalHomeownershipCostCalculator,
+            ITotalRentalCostCalculator totalRentalCostCalculator)
         {
             _homeAppreciationCalculator = homeAppreciationCalculator;
             _homeOwnershipCalculator = homeOwnershipCalculator;
             _rentalCostCalculator = rentalCostCalculator;
+            _totalHomeownershipCostCalculator = totalHomeownershipCostCalculator;
+            _totalRentalCostCalculator = totalRentalCostCalculator;
         }
 
         public async Task<Response> GetRentOrBuyDecision(UserInput input)
@@ -50,8 +58,15 @@ namespace RentOrBuy.Home.Business.RentOrBuyComputations
                     input.PlannedLengthOfStay);
             });
 
-            Dictionary<byte, OwnershipCostEachYear> homeownershipCost = await homeOwnershipCostTask;
-            Dictionary<byte, RentCostEachYear> rentalCost = await rentalCostTask;
+            var homeownershipCost = await homeOwnershipCostTask;
+            var rentalCost = await rentalCostTask;
+
+            var totalOwnershipCost = _totalHomeownershipCostCalculator.CalculateTotalOwnershipCost(
+                homeownershipCost.Values.ToList(),
+                input.OwnershipCosts);
+
+            var totalRentalCost = _totalRentalCostCalculator.CalculateTotalRentalCost(
+                rentalCost.Values.ToList());
 
             return new Response();
         }

@@ -39,6 +39,7 @@ namespace RentOrBuy.Home.Business.HomeownershipComputations.HomeOwnershipComputa
                 CalculateCommonFeeEachYear(ownershipCostsPerYear, i, economicFactors.Inflation);
                 CalculateExcessUtilitiesEachYear(ownershipCostsPerYear, i, economicFactors.Inflation);
             }
+            CalculateYearlyInterestPayment(ownershipCosts, ownershipCostsPerYear);
         }
 
         private void CalculateCostsForYearZero(OwnershipCostFactors ownershipCosts,
@@ -100,6 +101,24 @@ namespace RentOrBuy.Home.Business.HomeownershipComputations.HomeOwnershipComputa
             var excessUtilities = ownershipCostPerYear[--year].ExcessUtilities;
             var utilityIncrease = excessUtilities * (inflation / 100);
             currentYear.ExcessUtilities = (utilityIncrease + excessUtilities).RoundToTwoDecimalPlaces();
+        }
+
+        private void CalculateYearlyInterestPayment(OwnershipCostFactors ownershipCosts,
+            Dictionary<byte, OwnershipCostEachYear> ownershipCostEachYear)
+        {
+            var principal = ownershipCosts.Price - (ownershipCosts.Price * (ownershipCosts.DownPaymentPercentage / 100));       
+            var interest = ownershipCosts.MortgageRate;
+            var mortgageTerm = ownershipCosts.LengthOfMortgage;
+            var remainingLoanAmount = principal;
+            var principalPayablePerYear = principal / mortgageTerm;
+
+            //We assume a yearly repayment schedule for simplicity
+            for (var i = 0; i < ownershipCostEachYear.Count; i++)
+            {
+                var interestThisYear = remainingLoanAmount * interest / 100;
+                remainingLoanAmount -= principalPayablePerYear;
+                ownershipCostEachYear[(byte)i].MortgageInterestPayment = interestThisYear.RoundToTwoDecimalPlaces();
+            }
         }
     }
 }

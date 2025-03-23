@@ -13,5 +13,6 @@ namespace RentOrBuy.Home.DataModel.OwnershipCost
         public decimal MaintenanceCost { get; set; }
         public decimal CommonFee { get; set; }
         public decimal ExcessUtilities { get; set; }
+        public decimal MortgageInterestPayment { get; set; }
     }
 }
